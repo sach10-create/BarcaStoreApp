@@ -8,23 +8,35 @@ import { v4 as uuid } from "uuid";
 export const products = [
   {
     _id: uuid(),
-    title: "You Can WIN",
-    author: "Shiv Khera",
-    price: "5000",
-    categoryName: "non-fiction",
+		name: "Barcelona Kit",
+		category: "Jersey",
+		imgURL:
+			"https://github.com/sach10-create/Nova-Barca-Store/blob/dev/assets/barca.png",
+		price: 2999,
+		mrp: 5999,
+		discountPercent: 50,
+		discount: 3000,
   },
   {
     _id: uuid(),
-    title: "You are Winner",
-    author: "Junaid Qureshi",
-    price: "3000",
-    categoryName: "horror",
+		name: "Barcelona Kit",
+		category: "Away Kit",
+		imgURL:
+			"https://github.com/sach10-create/Nova-Barca-Store/blob/dev/assets/barca.png",
+		price: 2999,
+		mrp: 5999,
+		discountPercent: 50,
+		discount: 3000,
   },
   {
     _id: uuid(),
-    title: "Think and Grow Rich",
-    author: "Shiv Khera",
-    price: "1000",
-    categoryName: "fiction",
+		name: "Barcelona Kit",
+		category: "Home Kit",
+		imgURL:
+			"https://github.com/sach10-create/Nova-Barca-Store/blob/dev/assets/barca.png",
+		price: 2999,
+		mrp: 5999,
+		discountPercent: 50,
+		discount: 3000,
   },
 ];
