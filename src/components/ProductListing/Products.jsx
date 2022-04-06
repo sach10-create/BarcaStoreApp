@@ -1,5 +1,5 @@
-import { Footer } from "../Footer";
-import { Header } from "../Header";
+import { Footer } from "../Footer/Footer";
+import { Header } from "../Header/Header";
 import { Filters } from "./Filters";
 import { ProductListing } from "./ProductListing";
 

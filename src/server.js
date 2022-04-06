@@ -15,6 +15,7 @@ import {
 } from "./backend/controllers/CategoryController";
 import {
   getAllProductsHandler,
+  getAllFiltersHandler,
   getProductHandler,
 } from "./backend/controllers/ProductController";
 import {
@@ -25,6 +26,7 @@ import {
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
+import { filters } from "./backend/db/filters";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -38,6 +40,7 @@ export function makeServer({ environment = "development" } = {}) {
       user: Model,
       cart: Model,
       wishlist: Model,
+      filters : Model
     },
 
     // Runs on the start of the server
@@ -53,6 +56,7 @@ export function makeServer({ environment = "development" } = {}) {
       );
 
       categories.forEach((item) => server.create("category", { ...item }));
+      filters.forEach((item) => server.create("filter", { ...item }));
     },
 
     routes() {
@@ -63,6 +67,7 @@ export function makeServer({ environment = "development" } = {}) {
 
       // products routes (public)
       this.get("/products", getAllProductsHandler.bind(this));
+      this.get("/filters", getAllFiltersHandler.bind(this));
       this.get("/products/:productId", getProductHandler.bind(this));
 
       // categories routes (public)

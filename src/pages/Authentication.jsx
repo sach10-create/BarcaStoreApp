@@ -1,10 +1,10 @@
-const Authentication = () => {
+import { Authentication } from "../components";
+
+const AuthenticationPage = () => {
     return (
-      <div>
-        <h1>This is Authentication page</h1>
-      </div>
+      <Authentication/>
     );
   };
   
-  export { Authentication };
+  export { AuthenticationPage };
   

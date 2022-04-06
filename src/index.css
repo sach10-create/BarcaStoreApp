@@ -1,0 +1,17 @@
+.filters {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-div {
+  gap: 1rem;
+}
+
+.chips{
+  padding: 5px;
+}
+
+.filter-chip-selected{
+  color:var(--secondary-color);
+}
