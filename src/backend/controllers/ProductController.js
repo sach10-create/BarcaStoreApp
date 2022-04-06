@@ -15,6 +15,15 @@ export const getAllProductsHandler = function () {
 };
 
 /**
+ * This handler handles gets all filters in the db.
+ * send GET Request at /api/filters
+ * */
+
+ export const getAllFiltersHandler = function () {
+	return new Response(200, {}, { filters: this.db.filters });
+};
+
+/**
  * This handler handles gets all products in the db.
  * send GET Request at /api/user/products/:productId
  * */
