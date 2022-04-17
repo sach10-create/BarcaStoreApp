@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://barca-store-app.netlify.app/" target="_blank">
-    <img src="https://github.com/Nova-ui-Component-Library/BarcaStoreApp/blob/dev/components/assets/nova-logo-dark.png" alt="Nova UI logo" >
+     <img src="https://github.com/sach10-create/Nova-ui-Component-Library/blob/dev/components/assets/nova-logo-dark.png" alt="Nova UI logo" >
   </a>
 </p>
 <h1 align="center" color="green">Nova UI</h3>
