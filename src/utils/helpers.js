@@ -55,11 +55,17 @@ const getCartsDataFromId = (items, data) =>
     ...item,
   }));
 
+  const getDataFromId = (items, data) =>
+	items.map(({ _id}) => ({
+		...data.find((item) => item._id === _id)
+	}));
+
 export {
   removeFromArray,
   presentInArray,
   presentObjInArray,
   removeObjFromArray,
   updateObjInArray,
-  getCartsDataFromId
+  getCartsDataFromId,
+  getDataFromId
 };

@@ -1,6 +1,5 @@
 import axios from "axios";
-import { presentObjInArray } from "./";
-import { removeFromCartHandler } from "./";
+
 /**
  * Add product data to wishlist
  * @param {*} element
@@ -9,30 +8,39 @@ import { removeFromCartHandler } from "./";
  * @param {function} wishlistDispatch Reducer function
  */
 const addToWishlistHandler = (
-	element,
-	productData,
-	token,
-	wishlistDispatch
+  element,
+  productData,
+  token,
+  wishlistDispatch
 ) => {
-	element.preventDefault();
-	(async () => {
-		try {
-			const response = await axios.post(`/api/user/wishlist`, productData, {
-				headers: {
-					Accept: "*/*",
-					authorization: token,
-				},
-			});
-			wishlistDispatch({
-				type: "ADD_ITEM",
-				wishlistItemsCount: response.data.wishlist.length,
-				itemsInWishlist: [productData.product._id],
-				wishlistData: productData.product,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	})();
+  element.preventDefault();
+  (async () => {
+    try {
+      const response = await axios.post(
+        `/api/user/wishlist`,
+        { product: { _id: productData.product._id } },
+        {
+          headers: {
+            Accept: "*/*",
+            authorization: token,
+          },
+        }
+      );
+      console.log(response);
+      wishlistDispatch({
+        type: "ADD_ITEM",
+        payload: {
+          wishlistItemsCount: response.data.wishlist.length,
+          itemsInWishlist: {
+            _id: productData.product._id,
+            qty: 1,
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  })();
 };
 
 /**
@@ -43,30 +51,32 @@ const addToWishlistHandler = (
  * @param {function} wishlistDispatch Reducer function
  */
 const removeFromWishlistHandler = (
-	element,
-	productId,
-	token,
-	wishlistDispatch
+  element,
+  productId,
+  token,
+  wishlistDispatch
 ) => {
-	element.preventDefault();
-	(async () => {
-		try {
-			const response = await axios.delete(`/api/user/wishlist/${productId}`, {
-				headers: {
-					Accept: "*/*",
-					authorization: token,
-				},
-			});
-			wishlistDispatch({
-				type: "REMOVE_ITEM",
-				wishlistItemsCount: response.data.wishlist.length,
-				itemsInWishlist: [productId],
-				wishlistData: productId,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	})();
+  element.preventDefault();
+  (async () => {
+    try {
+      const response = await axios.delete(`/api/user/wishlist/${productId}`, {
+        headers: {
+          Accept: "*/*",
+          authorization: token,
+        },
+      });
+
+      wishlistDispatch({
+        type: "REMOVE_ITEM",
+        payload: {
+          wishlistItemsCount: response.data.wishlist.length,
+          itemsInWishlist: productId,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  })();
 };
 
 /**
@@ -76,22 +86,24 @@ const removeFromWishlistHandler = (
  * @param {function} wishlistDispatch Reducer function
  */
 const getWishlistDataHandler = (token, wishlistDispatch) => {
-	(async () => {
-		try {
-				const response = await axios.get(`/api/user/wishlist`, {
-				headers: {
-					Accept: "*/*",
-					authorization: token,
-				},
-			});
-			wishlistDispatch({
-				type: "GET_ITEM",
-				wishlistData: response.data.wishlist,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	})();
+  (async () => {
+    try {
+      const response = await axios.get(`/api/user/wishlist`, {
+        headers: {
+          Accept: "*/*",
+          authorization: token,
+        },
+      });
+      wishlistDispatch({
+        type: "GET_ITEM",
+        payload: {
+          itemsInWishlist: response.data.wishlist,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  })();
 };
 
 /**
@@ -102,54 +114,26 @@ const getWishlistDataHandler = (token, wishlistDispatch) => {
  * @param {function} wishlistDispatch Reducer function
  */
 const MoveToWishlistHandler = (
-	element,
-	productData,
-	token,
-	wishlistDispatch,
-	cartDispatch
+  element,
+  productId,
+  token,
+  wishlistDispatch,
+  cartDispatch
 ) => {
-	element.preventDefault();
-	(async () => {
-		try {
-			console.log("reached", productData, token);
-			const wishlistData = await axios.get(`/api/user/wishlist`, {
-				headers: {
-					Accept: "*/*",
-					authorization: token,
-				},
-			});
-			console.log("here = ", wishlistData);
-			if (
-				!presentObjInArray(wishlistData.data.wishlist, productData.product._id)
-			) {
-				const response = await axios.post(`/api/user/wishlist`, productData, {
-					headers: {
-						Accept: "*/*",
-						authorization: token,
-					},
-				});
-				wishlistDispatch({
-					type: "ADD_ITEM",
-					wishlistItemsCount: response.data.wishlist.length,
-					itemsInWishlist: [productData.product._id],
-					wishlistData: productData.product,
-				});
-			}
-			removeFromCartHandler(
-				element,
-				productData.product._id,
-				token,
-				cartDispatch
-			);
-		} catch (error) {
-			console.log(error);
-		}
-	})();
+  element.preventDefault();
+  (async () => {
+    try {
+      addToWishlistHandler(element, productId, token, wishlistDispatch);
+      removeFromCartHandler(element, productId, token, cartDispatch);
+    } catch (error) {
+      console.log(error);
+    }
+  })();
 };
 
 export {
-	addToWishlistHandler,
-	removeFromWishlistHandler,
-	getWishlistDataHandler,
-	MoveToWishlistHandler,
+  addToWishlistHandler,
+  removeFromWishlistHandler,
+  getWishlistDataHandler,
+  MoveToWishlistHandler,
 };
