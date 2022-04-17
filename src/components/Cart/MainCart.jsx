@@ -1,5 +1,5 @@
 import { useCart, useAuth, useProducts } from "../../context";
-import { getCartsDataFromId , removeFromCartHandler } from "../../utils";
+import { getCartsDataFromId, removeFromCartHandler } from "../../utils";
 
 const MainCart = () => {
   const { authState } = useAuth();
@@ -7,7 +7,7 @@ const MainCart = () => {
   const { productsData } = useProducts();
 
   const handleDeleteFromCart = (e, productId) =>
-  removeFromCartHandler(e, productId, authState.token, cartDispatch);
+    removeFromCartHandler(e, productId, authState.token, cartDispatch);
   const itemCount = cartState.cartItemsCount;
   const products = getCartsDataFromId(cartState.itemsInCart, productsData);
 
@@ -42,19 +42,27 @@ const MainCart = () => {
                     <p className="discount">({discountPercent}%)</p>
                   </span>
                 </section>
-                <div className="jersey-button d-flex justify-content-space-between">
-                <i className="fa-solid fa-trash-can h2-tag" onClick={(e) => handleDeleteFromCart(e , _id)}></i>
+                <div className="jersey-button">
+                  <div
+                    className="jersey-btn d-flex align-center justify-content-center remove-btn"
+                    onClick={(e) => handleDeleteFromCart(e, _id)}
+                  >
+                    <span className="cart-icon">
+                      <i className="fa-solid fa-trash-can h6-tag"></i>
+                    </span>
+                    <p className="cart-text h6-tag">Remove from Cart</p>
+                  </div>
                 </div>
               </div>
               )
             </li>
           )
         )
-      ):(
+      ) : (
         <h3> No Videos Added</h3>
       )}
     </>
   );
 };
 
-export { MainCart}
+export { MainCart };
