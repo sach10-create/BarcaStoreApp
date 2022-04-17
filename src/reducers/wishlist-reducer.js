@@ -5,38 +5,39 @@ import { removeFromArray, removeObjFromArray } from "../utils";
  * @param {*} wishlistAction The changed state
  * @returns Updated state into wishlistState
  */
-const wishlistReducer = (wishlistState, wishlistAction) => {
-	switch (wishlistAction.type) {
-		case "ADD_ITEM":
-			return {
-				...wishlistState,
-				wishlistItemsCount: wishlistAction.wishlistItemsCount,
-				itemsInWishlist: [
-					...wishlistState.itemsInWishlist,
-					...wishlistAction.itemsInWishlist,
-				],
-				wishlistData: [
-					...wishlistState.wishlistData,
-					wishlistAction.wishlistData,
-				],
-			};
+const wishlistReducer = (wishlistState, { type, payload }) => {
+  switch (type) {
+    case "ADD_ITEM":
+      return {
+        ...wishlistState,
+        wishlistItemsCount: payload.wishlistItemsCount,
+        itemsInWishlist: [
+          ...wishlistState.itemsInWishlist,
+          {
+            ...payload.itemsInWishlist,
+          },
+        ],
+      };
 
-		case "REMOVE_ITEM":
-			return {
-				...wishlistState,
-				wishlistItemsCount: wishlistAction.wishlistItemsCount,
-				itemsInWishlist: removeFromArray(
-					wishlistState.itemsInWishlist,
-					wishlistAction.itemsInWishlist[0]
-				),
-				wishlistData: removeObjFromArray(
-					wishlistState.wishlistData,
-					wishlistAction.wishlistData
-				),
-			};
-		default:
-			return wishlistState;
-	}
+    case "REMOVE_ITEM":
+      return {
+        ...wishlistState,
+        wishlistItemsCount: payload.wishlistItemsCount,
+        itemsInWishlist: removeFromArray(
+          wishlistState.itemsInWishlist,
+          payload.itemsInWishlist
+        ),
+      };
+
+    case "RESET":
+      return {
+        ...wishlistState,
+        itemsInWishlist: [],
+        wishlistItemsCount: 0,
+      };
+    default:
+      return wishlistState;
+  }
 };
 
 export { wishlistReducer };

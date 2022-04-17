@@ -3,7 +3,7 @@ import { useAuth, useProducts } from "../../context";
 import { presentObjInArray } from "../../utils";
 import { useWishlist, useCart } from "../../context";
 import { AddToCartBtn , AddToCartBtnRedirect , GoToCartBtn } from "./product-card";
-import { AddToWishlistBtn , AddToWishlistBtnRedirect  } from "./product-card";
+import { AddToWishlistBtn , AddToWishlistBtnRedirect , RemoveFromWishlistBtn } from "./product-card";
 
 const ProductListing = () => {
   const { productsData } = useProducts();

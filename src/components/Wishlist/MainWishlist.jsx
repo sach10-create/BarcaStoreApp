@@ -1,16 +1,16 @@
-import { useCart, useAuth, useProducts } from "../../context";
-import { getCartsDataFromId, removeFromCartHandler } from "../../utils";
+import { useAuth, useProducts, useWishlist } from "../../context";
+import { getDataFromId, removeFromWishlistHandler } from "../../utils";
 
-const MainCart = () => {
+const MainWishlist = () => {
   const { authState } = useAuth();
-  const { cartState, cartDispatch } = useCart();
+  const { wishlistState, wishlistDispatch } = useWishlist();
   const { productsData } = useProducts();
 
-  const handleDeleteFromCart = (e, productId) =>
-    removeFromCartHandler(e, productId, authState.token, cartDispatch);
-  const itemCount = cartState.cartItemsCount;
-  const products = getCartsDataFromId(cartState.itemsInCart, productsData);
-
+  const handleDeleteFromWishlist = (e, productId) =>
+    removeFromWishlistHandler(e, productId, authState.token, wishlistDispatch);
+  const itemCount = wishlistState.wishlistItemsCount;
+  const products = getDataFromId(wishlistState.itemsInWishlist, productsData);
+  console.log(productsData , wishlistState.itemsInWishlist);
   return (
     <>
       {itemCount ? (
@@ -45,12 +45,12 @@ const MainCart = () => {
                 <div className="jersey-button">
                   <div
                     className="jersey-btn d-flex align-center justify-content-center remove-btn"
-                    onClick={(e) => handleDeleteFromCart(e, _id)}
+                    onClick={(e) => handleDeleteFromWishlist(e, _id)}
                   >
                     <span className="cart-icon">
                       <i className="fa-solid fa-trash-can h6-tag"></i>
                     </span>
-                    <p className="cart-text h6-tag">Remove from Cart</p>
+                    <p className="cart-text h6-tag">Remove from Wishlist</p>
                   </div>
                 </div>
               </div>
@@ -64,4 +64,4 @@ const MainCart = () => {
   );
 };
 
-export { MainCart };
+export { MainWishlist };
