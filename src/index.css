@@ -15,3 +15,8 @@
 .filter-chip-selected{
   color:var(--secondary-color);
 }
+
+
+.listing-container{
+  margin: 3rem;
+}

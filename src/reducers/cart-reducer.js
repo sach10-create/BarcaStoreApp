@@ -1,7 +1,7 @@
 import {
-	removeFromArray,
-	removeObjFromArray,
-	updateObjInArray,
+  removeFromArray,
+  removeObjFromArray,
+  updateObjInArray,
 } from "../utils";
 /**
  * Reducer function to handle cart state
@@ -9,40 +9,50 @@ import {
  * @param {*} cartAction The changed state
  * @returns Updated state into cartState
  */
-const cartReducer = (cartState, cartAction) => {
-	switch (cartAction.type) {
-		case "ADD_ITEM":
-			return {
-				...cartState,
-				cartItemsCount: cartAction.cartItemsCount,
-				itemsInCart: [...cartState.itemsInCart, ...cartAction.itemsInCart],
-				cartData: [...cartState.cartData, cartAction.cartData],
-			};
+const cartReducer = (cartState, { type, payload }) => {
+  switch (type) {
+    case "ADD_ITEM":
+      return {
+        ...cartState,
+        cartItemsCount: payload.cartItemsCount,
+        itemsInCart: [...cartState.itemsInCart, { ...payload.itemsInCart }],
+      };
 
-		case "REMOVE_ITEM":
-			return {
-				...cartState,
-				cartItemsCount: cartAction.cartItemsCount,
-				itemsInCart: removeFromArray(
-					cartState.itemsInCart,
-					cartAction.itemsInCart[0]
-				),
-				cartData: removeObjFromArray(cartState.cartData, cartAction.cartData),
-			};
+    case "REMOVE_ITEM":
+      return {
+        ...cartState,
+        cartItemsCount: payload.cartItemsCount,
+        itemsInCart: removeFromArray(
+          cartState.itemsInCart,
+          payload.itemsInCart
+        ),
+      };
 
-		case "UPDATE_ITEM":
-			console.log(
-				"check = ",
-				updateObjInArray(cartState.cartData, cartAction.cartData)
-			);
-			return {
-				...cartState,
-				cartData: updateObjInArray(cartState.cartData, cartAction.cartData),
-			};
+    case "UPDATE_ITEM":
+      return {
+        ...cartState,
+        itemsInCart: updateObjInArray(
+          cartState.itemsInCart,
+          payload.itemsInCart
+        ),
+      };
+	  
+    case "GET_ITEM":
+      return {
+        ...cartState,
+        itemsInCart: [...payload.itemsInCart],
+      };
 
-		default:
-			return cartState;
-	}
+    case "RESET":
+      return {
+        ...cartState,
+        itemsInCart: [],
+        cartItemsCount: 0,
+      };
+
+    default:
+      return cartState;
+  }
 };
 
 export { cartReducer };

@@ -1,19 +1,16 @@
 import { useNavigate } from "react-router";
-import { useProducts } from "../../context";
-import { presentInArray } from "../../utils";
+import { useAuth, useProducts } from "../../context";
+import { presentObjInArray } from "../../utils";
 import { useWishlist, useCart } from "../../context";
-import { AddToCartBtn } from "./product-card";
-import { AddToWishlistBtn } from "./product-card";
+import { AddToCartBtn , AddToCartBtnRedirect , GoToCartBtn } from "./product-card";
+import { AddToWishlistBtn , AddToWishlistBtnRedirect  } from "./product-card";
 
 const ProductListing = () => {
   const { productsData } = useProducts();
   const { wishlistState } = useWishlist();
   const { cartState } = useCart();
-  const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+  const { authState} = useAuth();
 
-
-  console.log("Here" , cartState);
   return (
     <section className="products d-flex flex-wrap">
       {productsData.length !== 0 ? (
@@ -46,8 +43,8 @@ const ProductListing = () => {
                 </span>
               </section>
               <div className="jersey-button d-flex justify-content-space-between">
-                {token ? (
-                  presentInArray(cartState.itemsInCart, _id) ? (
+                {authState.token ? (
+                  presentObjInArray(cartState.itemsInCart, _id) ? (
                     <GoToCartBtn />
                   ) : (
                     <AddToCartBtn
@@ -67,16 +64,16 @@ const ProductListing = () => {
                           reviews,
                         },
                       }}
-                      token={token}
+                      token={authState.token}
                     />
                   )
                 ) : (
                   <AddToCartBtnRedirect />
                 )}
 
-                {token ? (
-                  presentInArray(wishlistState.itemsInWishlist, _id) ? (
-                    <RemoveFromWishlistBtn productId={_id} token={token} />
+                {authState.token ? (
+                  presentObjInArray(wishlistState.itemsInWishlist, _id) ? (
+                    <RemoveFromWishlistBtn productId={_id} token={authState.token} />
                   ) : (
                     <AddToWishlistBtn
                       productData={{
@@ -94,7 +91,7 @@ const ProductListing = () => {
                           type,
                         },
                       }}
-                      token={token}
+                      token={authState.token}
                     />
                   )
                 ) : (

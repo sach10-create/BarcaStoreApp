@@ -7,6 +7,7 @@ export {
     presentObjInArray,
     removeObjFromArray,
     updateObjInArray,
+	getCartsDataFromId
    } from "./helpers";   
 
    export {
