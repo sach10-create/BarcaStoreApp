@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://barca-store-app.netlify.app/" target="_blank">
-    <img src="https://github.com/sach10-create/BarcaStoreApp/blob/dev/components/assets/nova-logo-dark.png" alt="Nova UI logo" >
+    <img src="https://github.com/Nova-ui-Component-Library/BarcaStoreApp/blob/dev/components/assets/nova-logo-dark.png" alt="Nova UI logo" >
   </a>
 </p>
 <h1 align="center" color="green">Nova UI</h3>
@@ -18,7 +18,6 @@ A Ecommerce website for Barca merchandise.
 
 
 # Key Features
-▶️ All the components support both dark and light theme. <br/>
 ▶️ Home Page <br/>
 ▶️ Product Listing Page <br/>
 ▶️ Filters by Price range slider, category, sort by, category, and rating range slider <br/>
