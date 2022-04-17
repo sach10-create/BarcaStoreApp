@@ -15,3 +15,13 @@
 .filter-chip-selected{
   color:var(--secondary-color);
 }
+
+
+.listing-container{
+  margin: 3rem;
+}
+
+.remove-btn{
+  border-radius: 1rem;
+  margin: 0 2rem 0 2rem;
+}

@@ -16,7 +16,6 @@ const Filters = () => {
             <form className="flex-column d-flex">
               <FilterHeader />
               <SortByFilter />
-
               <CategoryFilter />
               <BrandFilter />
             </form>

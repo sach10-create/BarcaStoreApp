@@ -20,9 +20,6 @@ const RegisterProvider = ({ children }) => {
       password: "",
     }
   );
-
-  console.log(registerState);
-
   return (
     <RegisterContext.Provider value={{ registerState, registerDispatch }}>
       {children}
