@@ -11,12 +11,15 @@ const MainAuth = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+
+  console.log( loginState , registerState)
+
   const handleEmailSignIn = (e) => {
-    loginDispatch({ email: e.target.value });
+    loginDispatch({ email: e.target.value, type: "UPDATE_EMAIL" });
   };
 
   const handlePasswordSignIn = (e) => {
-    loginDispatch({ password: e.target.value });
+    loginDispatch({ password: e.target.value, type: "UPDATE_PASSWORD" });
   };
 
   const [authTabsState, setAuthTabsState] = useState("login");
@@ -26,15 +29,23 @@ const MainAuth = () => {
   };
 
   const handleEmailSignUp = (e) => {
-    registerDispatch({ email: e.target.value });
+    registerDispatch({ email: e.target.value, type: "UPDATE_EMAIL" });
   };
 
   const handlePasswordSignUp = (e) => {
-    registerDispatch({ password: e.target.value });
+    registerDispatch({ password: e.target.value, type: "UPDATE_PASSWORD" });
   };
 
   const handleNameSignUp = (e) => {
-    registerDispatch({ name: e.target.value });
+    registerDispatch({ name: e.target.value, type: "UPDATE_NAME" });
+  };
+
+  const testHandlerSignIn = (e) => {
+    loginDispatch({
+      email: "test@gmail.com",
+      password: "test123",
+      type: "TEST_CREDENTIAL",
+    });
   };
 
   return (
@@ -45,9 +56,8 @@ const MainAuth = () => {
         }`}
       >
         <div className="login-form-container sign-up-container">
-          <form
+          <div
             className="login-form d-flex align-center justify-content-center flex-column"
-            action="#"
           >
             <h1 className="h1-heading">Create Account</h1>
             <span className="alternate">
@@ -85,12 +95,11 @@ const MainAuth = () => {
             >
               Sign Up
             </button>
-          </form>
+          </div>
         </div>
         <div className="login-form-container sign-in-container">
-          <form
+          <div
             className="login-form d-flex align-center justify-content-center flex-column"
-            action="#"
           >
             <h1 className="h1-heading">Sign in</h1>
             <span className="alternate">Use your account</span>
@@ -99,14 +108,16 @@ const MainAuth = () => {
               type="email"
               placeholder="Email"
               onChange={handleEmailSignIn}
+              value={loginState.email}
             />
             <input
               className="inputs"
               type="password"
               placeholder="Password"
               onChange={handlePasswordSignIn}
+              value={loginState.password}
             />
-            <a className="social justify-content-center align-center" href="#">
+            <a className="social justify-content-center align-center">
               Forgot your password?
             </a>
             <button
@@ -117,7 +128,10 @@ const MainAuth = () => {
             >
               Sign In
             </button>
-          </form>
+            <button className="button test-button" onClick={testHandlerSignIn}>
+              Test Crediantials
+            </button>
+          </div>
         </div>
         <div className="overlay-container">
           <div className="overlay">

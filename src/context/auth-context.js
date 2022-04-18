@@ -15,7 +15,8 @@ const AuthProvider = ({ children }) => {
         () =>
             authDispatch({
                 token: localStorage.getItem("token"),
-                name: localStorage.getItem("name"),
+                firstName: localStorage.getItem("firstName"),
+                lastName: localStorage.getItem("lastName"),
                 email: localStorage.getItem("email"),
                 type: "UPDATE_USER",
             }),

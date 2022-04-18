@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context";
 
 const Header = () => {
+ const { authState} = useAuth();
+
+
   return (
     <header className="ecom-header header-comp">
       <div className="header-container-1 d-flex justify-content-space-between align-center">
@@ -42,7 +46,7 @@ const Header = () => {
             <div className="icon-badge">
               <Link to="/auth" className="no-link-store">
                 <i className="fas fa-user header-img"></i>
-                <p className="icon-badge-text">Admin</p>
+                <p className="icon-badge-text">{authState.token ? "Profile" : "SignIn"}</p>
               </Link>
             </div>
             <div className="icon-badge">

@@ -10,7 +10,6 @@ const MainWishlist = () => {
     removeFromWishlistHandler(e, productId, authState.token, wishlistDispatch);
   const itemCount = wishlistState.wishlistItemsCount;
   const products = getDataFromId(wishlistState.itemsInWishlist, productsData);
-  console.log(productsData , wishlistState.itemsInWishlist);
   return (
     <>
       {itemCount ? (

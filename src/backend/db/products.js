@@ -45,4 +45,19 @@ export const products = [
 		discountPercent: 70,
 		discount: 3000,
   },
+
+  {
+    _id: uuid(),
+		name: "Barcelona Kit",
+		brand : "PUMA",
+		type: "Jersey",
+		category: "Training kit",
+		imgURL:
+			"https://raw.githubusercontent.com/sach10-create/Nova-ui-Component-Library/dev/components/assets/barca.png",
+		price: 4999,
+		mrp: 5999,
+		discountPercent: 70,
+		discount: 3000,
+  },
+
 ];

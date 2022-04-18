@@ -15,11 +15,13 @@ const AddToWishlistBtn = (props) => {
 }
     
 const AddToWishlistBtnRedirect = () => 
-    <Link to="/auth" state={{ state: '/products' }} className="jersey-btn d-flex align-center">
+    <Link to="/auth" state={{ state: '/products' }} >
+       <button className="jersey-btn d-flex align-center">
         <span className="cart-icon">
             <i className="far fa-heart"></i>
         </span>
         <p className="wishlist-text">Add to wishlist</p>
+        </button>
     </Link>
 
 const RemoveFromWishlistBtn = (props) => {
