@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context";
+import { useAuth , useCart , useLogin , useWishlist , useRegister } from "../../context";
 
 const Header = () => {
- const { authState} = useAuth();
+ const { authDispatch, authState } = useAuth();
+ const { cartDispatch } = useCart();
+ const { wishlistDispatch } = useWishlist();
+ const { loginDispatch } = useLogin();
+ const { registerDispatch } = useRegister();
+ const handleLogout = () => {
+   localStorage.clear();
+   authDispatch({ type: "LOGOUT" });
+   cartDispatch({ type: "RESET" });
+   wishlistDispatch({ type: "RESET" });
+   loginDispatch({ type: "RESET" });
+   registerDispatch({ type: "RESET" });
+ }
 
 
   return (
@@ -46,7 +58,7 @@ const Header = () => {
             <div className="icon-badge">
               <Link to="/auth" className="no-link-store">
                 <i className="fas fa-user header-img"></i>
-                <p className="icon-badge-text">{authState.token ? "Profile" : "SignIn"}</p>
+                <p className="icon-badge-text" onClick = {handleLogout}>{authState.token ? "Logout" : "SignIn"} </p>
               </Link>
             </div>
             <div className="icon-badge">

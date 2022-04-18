@@ -21,7 +21,7 @@ const BrandFilter = () => {
         return (
           <li className="no-list chips" key={`brand-${index}`}>
             <label
-              className={`cursor-pointer${
+              className={`cursor-pointer ${
                 productsState.brandFilters[name] ? "filter-chip-selected" : ""
               }`}
             >
