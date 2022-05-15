@@ -11,21 +11,18 @@ const addToCartHandler = (e, productData, token, cartDispatch) => {
   e.preventDefault();
   (async () => {
     try {
-
-    
       const response = await axios.post(
         `/api/user/cart`,
         { product: { _id: productData.product._id } },
-         {
+        {
           headers: {
             Accept: "*/*",
             authorization: token,
           },
         }
       );
-        console.log(response)
+      console.log(response);
       cartDispatch({
-     
         type: "ADD_ITEM",
         payload: {
           cartItemsCount: response.data.cart.length,

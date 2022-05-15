@@ -19,10 +19,10 @@ const loginHandler = (e, location, navigate, loginState,authDispatch) => {
          
             const response = await axios.post(`/api/auth/login`, loginInfo);
             // saving the encodedToken in the localStorage
-
+            console.log(response, loginInfo);
             authDispatch({
                 token: response.data.encodedToken,
-                name: response.data.foundUser.name,
+                name: response.data.foundUser.firstName,
                 email: response.data.foundUser.email,
                 type: "UPDATE_USER",
             });

@@ -56,7 +56,7 @@ const Header = () => {
           </form>
           <div className="icon-badge-container d-flex flex-wrap justify-content-center">
             <div className="icon-badge">
-              <Link to="/auth" className="no-link-store">
+              <Link to="/auth" state={{from:{pathname:"/"}}} className="no-link-store">
                 <i className="fas fa-user header-img"></i>
                 <p className="icon-badge-text" onClick = {handleLogout}>{authState.token ? "Logout" : "SignIn"} </p>
               </Link>
